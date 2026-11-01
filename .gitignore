@@ -1,0 +1,6 @@
+# Ignore everything except for the Report
+/*
+
+!.gitignore
+!"Veteran's Donors Report.qmd"
+
