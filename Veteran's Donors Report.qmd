@@ -51,6 +51,7 @@ Ensure clean character data
 ```{r}
 # State data overview
 summary(donors$state)
+class(donors$state)
 
 # State unique values
 count_states <- length(unique(donors$state))
@@ -65,7 +66,39 @@ non_state_terr
 donors1 <- donors |> 
   mutate(
     isState = !(state %in% non_state_terr),
-    .after = state)
+    .after = state) |> 
+  mutate(state = as.factor(state))
+class(donors1$state)
 
-# 
+# Urbanicity data overview
+summary(donors1$urbanicity)
+class(donors1$urbanicity)
+
+# Urbanicity unique values
+unique(donors1$urbanicity)
+
+# Convert urbanicity to factor
+donors2 <- donors1 |>
+  mutate(urbanicity = as.factor(urbanicity))
+donors2
+
+# Inspect gender
+unique(donors2$gender)
+class(donors2$gender)
+
+# Convert gender to factor
+donors3 <- donors2 |> 
+  mutate(gender = as.factor(gender))
+donors3
+
+# Inspect socio-economic status
+summary(donors3$socioEconomicStatus)
+unique(donors3$socioEconomicStatus)
+class(donors3$socioEconomicStatus)
+
+# Convert socioEconomicStatus to factor
+donors_char_col_cleaned <- donors3 |> 
+  mutate(socioEconomicStatus = as.factor(socioEconomicStatus))
+
+donors_char_col_cleaned[c("state", "urbanicity", "socioEconomicStatus","gender")]
 ```
