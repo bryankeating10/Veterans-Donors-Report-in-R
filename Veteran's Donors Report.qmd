@@ -1,0 +1,71 @@
+# National Veteran's Organization Donor Report
+
+Prepare session
+
+```{r}
+remove(list = ls())
+library(tidyverse)
+donors <- read_csv("donors.csv", show_col_types = FALSE)
+```
+
+## Initial Inspection
+
+Familiarize
+
+```{r}
+# Inspect column names
+col_names <- colnames(donors) |> 
+  as.data.frame() |> 
+  rename(Columns = "colnames(donors)") |> 
+  arrange(Columns)
+col_names
+
+# Column types
+col_types <- data.frame(
+  col_name = names(donors),
+  col_type = sapply(donors, class),
+  row.names = NULL) |> 
+  arrange(col_type)
+col_types
+
+# Summarise dataset
+summary(donors)
+
+# Inspect NAs
+col_NA <- colSums(is.na(donors)) |> 
+  as.data.frame() |> 
+  rename(NA_Count = "colSums(is.na(donors))") |> 
+  arrange(desc(NA_Count))
+col_NA
+
+total_donors <- nrow(donors)
+col_NA_prop <- col_NA |> 
+  mutate(NA_Prop = round(NA_Count / total_donors,2))
+col_NA_prop
+```
+
+## Cleaning
+
+Ensure clean character data
+
+```{r}
+# State data overview
+summary(donors$state)
+
+# State unique values
+count_states <- length(unique(donors$state))
+count_states # 57 tells us there is either misspelling, or non-domestic states
+
+# Compare the state codes from the dataset with built-in R state codes
+state_codes <- c(unique(donors$state))
+non_state_terr <- c(setdiff(state_codes, state.abb))
+non_state_terr
+
+# Identify non-US-state territories
+donors1 <- donors |> 
+  mutate(
+    isState = !(state %in% non_state_terr),
+    .after = state)
+
+# 
+```
