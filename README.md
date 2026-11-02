@@ -7,3 +7,7 @@
 ## Histograms
 
 - Donor age distribution (Age bookmark)
+
+## table() Function
+
+- Donor home settlement and response to mailing combination (Urbanicity bookmark)

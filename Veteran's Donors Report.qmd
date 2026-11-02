@@ -181,3 +181,32 @@ even_odd_prop <- round(even_odd_diff / (even_odd_age$odd),2)
 ```
 
 Out of 95,412 donors, there were 44,540 donors with an even number for age. There were 27,207 donors with an odd number and 23,665 without a collected value for age in the data set. It is my assumption that either an error during collection caused odd age values to be replaced with NA, or there is a systemic targeting of even-aged donors by the Veteran's Organization. Possibly an automated outreach that pings the donor every 2 years following an arbitrary, even-numbered age. Could use some further investigation.
+
+### Urbanicity
+
+This column categorizes the settlement type where a donor lives. Possible categories are city, rural, suburb, town, and urban.
+
+```{r}
+# Donor settlement categories
+urbcit_props <- data.frame(prop.table(table(donors_cl$urbanicity)))
+urbcit_props
+barplot(
+  table(donors_cl$urbanicity),
+  main = "Why the relative scarcity of urban donors?",
+  las = 1,
+  ylab = "Count",
+  cex.axis = 0.75,
+  col = c(rep("gray",4), "red"))
+```
+
+Quick multi-factor analyses
+
+```{r}
+# Donor home settlement type and mailing response
+urbCit_respMail <- round(proportions(table(donors_cl$respondedMailing, donors_cl$urbanicity)),3)
+barplot(urbCit_respMail)
+
+# Donor home settlement type and 
+gend_urbCit <- round(proportions(table(donors_cl$gender, donors_cl$urbanicity)),3)
+barplot(gend_urbCit)
+```
