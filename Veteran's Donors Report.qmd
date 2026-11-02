@@ -157,7 +157,7 @@ donors_cl |>
   )
 ```
 
-The histogram of donor age uncovers a surprising pattern:
+The histogram of donor age reveals a surprising pattern:
 
 ```{r}
 # Even and odd age counts
@@ -176,8 +176,8 @@ even_odd_age
 # Difference between even aged donors and odd aged donors
 even_odd_diff <- even_odd_age$even - even_odd_age$odd
 even_odd_prop <- round(even_odd_diff / (even_odd_age$odd),2)
-even_odd_diff
-even_odd_prop
+# even_odd_diff
+# even_odd_prop
 ```
 
 Out of 95,412 donors, there were 44,540 donors with an even number for age. There were 27,207 donors with an odd number and 23,665 without a collected value for age in the data set. It is my assumption that either an error during collection caused odd age values to be replaced with NA, or there is a systemic targeting of even-aged donors by the Veteran's Organization. Possibly an automated outreach that pings the donor every 2 years following an arbitrary, even-numbered age. Could use some further investigation.
