@@ -221,3 +221,34 @@ barplot(
   col = gender_colors,
   border = "white")
 ```
+
+## Percentile experimentation
+
+### Total Donation Amount
+
+The "zero-th" percentile gives the minimum value, 50th gives the median, and 100th gives the maximum.
+
+```{r}
+# First quartile
+quantile(donors_cl$totalGivingAmount, 0.25, na.rm = TRUE)
+# Third quartile
+quantile(donors_cl$totalGivingAmount, 0.75, na.rm = TRUE)
+# All at once
+quantile(donors_cl$totalGivingAmount, probs = seq(0, 1.0, by = 0.1), na.rm = TRUE)
+```
+
+###  Number of Donations
+
+```{r}
+quantile(donors_cl$numberGifts, probs = seq(0,1,by=0.25))
+```
+
+### First and Last Donation Info
+
+```{r}
+# Time since first donation (years)
+quantile(donors_cl$yearsSinceFirstDonation, probs = seq(0,1,by=0.25), na.rm = TRUE)
+
+# Time since most recent donation (months)
+quantile(donors_cl$monthsSinceLastDonation, probs = seq(0,1,by=0.25), na.rm = TRUE)
+```
