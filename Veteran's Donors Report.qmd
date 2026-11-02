@@ -88,7 +88,7 @@ class(donors2$gender)
 
 # Convert gender to factor
 donors3 <- donors2 |> 
-  mutate(gender = as.factor(gender))
+  mutate(gender = factor(gender, levels = c("male", "female", "joint")))
 donors3
 
 # Inspect socio-economic status
@@ -206,7 +206,18 @@ Quick multi-factor analyses
 urbCit_respMail <- round(proportions(table(donors_cl$respondedMailing, donors_cl$urbanicity)),3)
 barplot(urbCit_respMail)
 
-# Donor home settlement type and 
+# Donor home settlement type and gender
 gend_urbCit <- round(proportions(table(donors_cl$gender, donors_cl$urbanicity)),3)
-barplot(gend_urbCit)
+# Plot theme
+gender_colors <- c("#4575b4", "#d73027", "#fee090")
+
+barplot(
+  gend_urbCit,
+  beside = TRUE,
+  legend.text = TRUE,
+  main = "Females dominated donations across the whole dataset",
+  xlab = "Settlement Type",
+  ylab = "Proportion of all donors with non-NA genders",
+  col = gender_colors,
+  border = "white")
 ```
