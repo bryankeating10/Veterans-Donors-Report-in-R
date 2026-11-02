@@ -106,7 +106,9 @@ donors_cl[c("state", "urbanicity", "socioEconomicStatus","gender")]
 remove(donors, donors1, donors2, donors3)
 ```
 
-Major aggregates and visualizations
+## Major aggregates and visualizations
+
+### Age
 
 ```{r}
 # Donor age parameters
@@ -121,5 +123,61 @@ age_paras <- data.frame(
 
 age_paras
 
+# Donor age visualization
+donors_cl |> 
+  ggplot(aes(x = age)) + geom_histogram(binwidth = 1)
 
+# Not super helpful, but getting practice with stripchart()
+stripchart(
+  donors_cl$age,
+  method = "stack",
+  pch = 16)
+
+donors_cl |> 
+  ggplot(aes(x = age)) + 
+  geom_boxplot(
+    fill = "#69b3a2",
+    color = "#2c3e50",
+    alpha = 0.7,
+    outlier.color = "#e74c3c",
+    outlier.shape = 21,
+    outlier.fill = "#e74c3c",
+    outlier.size = 2
+  ) +
+  labs(
+    title = "Donor Age",
+    subtitle = "National Veteran's Organization Dataset",
+    x = "Age (yrs)"
+  ) +
+  theme(
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank()
+  )
 ```
+
+The histogram of donor age uncovers a surprising pattern:
+
+```{r}
+# Even and odd age counts
+even_odd_age <- data.frame(
+  even = donors_cl |>
+    filter(age %% 2 == 0) |> 
+    nrow(),
+  odd = donors_cl |>
+    filter(age %% 2 == 1) |> 
+    nrow(),
+  na = donors_cl |>
+    filter(is.na(age)) |> 
+    nrow())
+even_odd_age
+
+# Difference between even aged donors and odd aged donors
+even_odd_diff <- even_odd_age$even - even_odd_age$odd
+even_odd_prop <- round(even_odd_diff / (even_odd_age$odd),2)
+even_odd_diff
+even_odd_prop
+```
+
+Out of 95,412 donors, there were 44,540 donors with an even number for age. There were 27,207 donors with an odd number and 23,665 without a collected value for age in the data set. It is my assumption that either an error during collection caused odd age values to be replaced with NA, or there is a systemic targeting of even-aged donors by the Veteran's Organization. Possibly an automated outreach that pings the donor every 2 years following an arbitrary, even-numbered age. Could use some further investigation.
