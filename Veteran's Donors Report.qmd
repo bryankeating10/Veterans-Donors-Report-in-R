@@ -97,8 +97,29 @@ unique(donors3$socioEconomicStatus)
 class(donors3$socioEconomicStatus)
 
 # Convert socioEconomicStatus to factor
-donors_char_col_cleaned <- donors3 |> 
+donors_cl <- donors3 |> 
   mutate(socioEconomicStatus = as.factor(socioEconomicStatus))
 
-donors_char_col_cleaned[c("state", "urbanicity", "socioEconomicStatus","gender")]
+donors_cl[c("state", "urbanicity", "socioEconomicStatus","gender")]
+
+# Clear up space in memory
+remove(donors, donors1, donors2, donors3)
+```
+
+Major aggregates and visualizations
+
+```{r}
+# Donor age parameters
+avg_age <- round(mean(donors_cl$age, na.rm = T),1)
+med_age <- median(donors_cl$age, na.rm = T)
+# Inner 90% of values
+trim_avg_age <- round(mean(donors_cl$age, trim = 0.05, na.rm = TRUE), 1)
+
+age_paras <- data.frame(
+  metric = c('Mean', 'Trimmed Mean', 'Median'),
+  value = c(avg_age, trim_avg_age, med_age))
+
+age_paras
+
+
 ```
