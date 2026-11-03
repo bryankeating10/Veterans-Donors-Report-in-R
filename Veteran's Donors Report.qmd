@@ -333,6 +333,13 @@ IQR_func_avg_don <- IQR(donors_cl$averageGiftAmount, na.rm = TRUE)
 IQR_func_avg_don
 ```
 
-### 
+### Standard Deviation
+
+Can explore this if I have more time later
+
+```{r}
+stdev_avg_don <- sd(donors_cl$averageGiftAmount, na.rm = TRUE)
+stdev_avg_don
+```
 
 ## Linear Regression
