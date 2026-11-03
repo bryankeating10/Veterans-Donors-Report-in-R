@@ -222,7 +222,30 @@ barplot(
   border = "white")
 ```
 
-## Percentile experimentation
+### Time Since First and Last Donation
+
+```{r}
+# Calculating frequencies "the hard way"
+since_first_prop <- data.frame(
+  prop.table(table(donors_cl$yearsSinceFirstDonation)))
+
+since_first_prop |>
+  ggplot(aes(x = Var1, y = Freq)) +
+  geom_col() +
+  scale_y_continuous(labels = scales::percent)
+
+# Plotting frequencies without calculation
+donors_cl |> 
+  ggplot(aes(x = yearsSinceFirstDonation)) + 
+  geom_bar(position = "identity")
+
+# Using position = "fill" to investigate response to mailing versus time since last gift - pretty useless
+donors_cl |> 
+  ggplot(aes(x = monthsSinceLastDonation, fill = respondedMailing)) + 
+  geom_bar(position = "fill")
+```
+
+## Percentile Experimentation
 
 ### Total Donation Amount
 
