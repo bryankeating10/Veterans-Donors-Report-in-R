@@ -297,4 +297,42 @@ boxplot(data = donors_cl, monthsSinceLastDonation ~ respondedMailing)
 boxplot(data = donors_cl, numberGifts ~ respondedMailing, outline = FALSE)
 ```
 
+## Measures of Variability
+
+### Range
+
+The range of the number of children registered to each donor is 6. It is important to note that this category is 87% NA, so any conclusions about the donor data set as a whole may be difficult to trust.
+
+```{r}
+range_children <- max(donors_cl$numberChildren, na.rm = TRUE) - min(donors_cl$numberChildren, na.rm = TRUE)
+range_children
+```
+
+Another way of calculating range using the average gift amount
+
+```{r}
+range_avg_don <- round(diff(range(donors_cl$averageGiftAmount)),2)
+range_avg_don
+```
+
+### Interquartile Range
+
+The interquartile range is more resistant to outliers than a pure range calculation. If average donation were uniformly distributed, it would be expected that the IQR would be half the range. However, outliers in this data set cause the IQR to be much tighter than that.
+
+```{r}
+# quantile(donors_cl$averageGiftAmount, 0.25, na.rm = TRUE)
+# quantile(donors_cl$averageGiftAmount, 0.75, na.rm = TRUE)
+IQR_avg_don <- diff(quantile(donors_cl$averageGiftAmount, probs = c(0.25, 0.75), na.rm = TRUE))
+IQR_avg_don
+```
+
+IQR using R's built-in function:
+
+```{r}
+IQR_func_avg_don <- IQR(donors_cl$averageGiftAmount, na.rm = TRUE)
+IQR_func_avg_don
+```
+
+### 
+
 ## Linear Regression
