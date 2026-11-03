@@ -1,10 +1,14 @@
 # Demonstrating R proficiency by analyzing a dataset of donors
 
-## Barplots
+## Bar Plots
 
 - Donor home settlement category (Urbanicity bookmark)
 
 - (Time Since First and Last Donation bookmark)
+
+## Box Plots
+
+- Total giving amount grouped by home settlement type (Grouped Donation Totals bookmark)
 
 ## Histograms
 

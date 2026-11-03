@@ -106,7 +106,7 @@ donors_cl[c("state", "urbanicity", "socioEconomicStatus","gender")]
 remove(donors, donors1, donors2, donors3)
 ```
 
-## Major aggregates and visualizations
+## Major Aggregates and Visualizations
 
 ### Age
 
@@ -274,4 +274,18 @@ quantile(donors_cl$yearsSinceFirstDonation, probs = seq(0,1,by=0.25), na.rm = TR
 
 # Time since most recent donation (months)
 quantile(donors_cl$monthsSinceLastDonation, probs = seq(0,1,by=0.25), na.rm = TRUE)
+```
+
+## Two Variable Analysis
+
+### Grouped Donation Totals
+
+Data with many outliers can cause issues when represented by box plots. Either a different visual representation should be chosen, or outliers should be removed. By omitting the outliers, we discover that the distribution of total giving amount is not correlated to home settlement type.
+
+```{r}
+# Total donation vs home settlement type
+boxplot(data = donors_cl, totalGivingAmount ~ urbanicity)
+
+# Total donation vs home settlement type, omitting outliers
+boxplot(data = donors_cl, totalGivingAmount ~ urbanicity, outline = FALSE)
 ```
