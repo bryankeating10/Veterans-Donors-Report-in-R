@@ -10,6 +10,8 @@
 
 - Total giving amount grouped by home settlement type (Grouped Donation Totals bookmark)
 
+- Number of gifts grouped by response to mailing (Grouped Donation Totals bookmark)
+
 ## Histograms
 
 - Donor age distribution (Age bookmark)

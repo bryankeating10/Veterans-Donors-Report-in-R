@@ -289,3 +289,12 @@ boxplot(data = donors_cl, totalGivingAmount ~ urbanicity)
 # Total donation vs home settlement type, omitting outliers
 boxplot(data = donors_cl, totalGivingAmount ~ urbanicity, outline = FALSE)
 ```
+
+The median time since last donation seems to be independent of whether the donor responded to the mailing. The distribution of the number of gifts, grouped by response to the mailing, seems to show a relationship that can be investigated further.
+
+```{r}
+boxplot(data = donors_cl, monthsSinceLastDonation ~ respondedMailing)
+boxplot(data = donors_cl, numberGifts ~ respondedMailing, outline = FALSE)
+```
+
+## Linear Regression
