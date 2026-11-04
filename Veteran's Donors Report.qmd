@@ -358,4 +358,39 @@ stdev_avg_don <- sqrt(variance_avg_don) # squre root of variance
 stdev_avg_don
 ```
 
+### Z-Score
+
+Ten donors have been selected to demonstrate the usage of z-scores to compare values on different measurement scales. First, the frequency distributions of `yearsSinceFistDonation` and `numberGifts` are displayed. Then the z-scores of 10 of the most valuable and reliable donors were compared. A z-score of 26 is virtually impossible in a standard normal distribution, so if we couldn't tell by the histograms, we know now that these parameters are not normally distributed.
+
+```{r}
+barplot(table(donors_cl$yearsSinceFirstDonation))
+barplot(table(donors_cl$numberGifts))
+
+# Data set standard deviations
+sig_yrs <- sd(donors_cl$yearsSinceFirstDonation)
+sig_gifts <- sd(donors_cl$numberGifts)
+
+# Data set means
+mean_yrs <- mean(donors_cl$yearsSinceFirstDonation)
+mean_gifts <- mean(donors_cl$numberGifts)
+
+# Select donors
+first_donors <- donors_cl |> 
+  arrange(desc(yearsSinceFirstDonation)) |> 
+  head(5)
+freq_donors <- donors_cl |> 
+  arrange(desc(numberGifts)) |> 
+  head(5)
+z_sample <- bind_rows(first_donors, freq_donors)
+
+# Z-Scores
+z_scores <- z_sample |> 
+  select(state, gender, age, yearsSinceFirstDonation, numberGifts) |> 
+  mutate(yrs_z = (yearsSinceFirstDonation - mean_yrs) / sig_yrs) |> 
+  mutate(gifts_z = (numberGifts - mean_gifts) / sig_gifts) |> 
+  arrange(gifts_z)
+
+z_scores
+```
+
 ## Linear Regression
