@@ -335,10 +335,26 @@ IQR_func_avg_don
 
 ### Standard Deviation
 
-Can explore this if I have more time later
+Built-in R standard deviation function for stdev of averageGiftAmount
 
 ```{r}
-stdev_avg_don <- sd(donors_cl$averageGiftAmount, na.rm = TRUE)
+stdev_func_avg_don <- sd(donors_cl$averageGiftAmount, na.rm = TRUE)
+stdev_func_avg_don
+```
+
+Corresponding hand calculation
+
+```{r}
+# Condensing code lines
+x <- donors_cl$averageGiftAmount
+num_avg_don <- length(x)
+
+# Begin hand calculation
+mean_avg_don <- mean(x) # mean
+diff_avg_don <- x - mean(x) # differences from the mean
+sq_diff_avg_don <- diff_avg_don ^ 2 # sqaured diffs
+variance_avg_don <- sum(sq_diff_avg_don) / num_avg_don # sum of squares / datapoints
+stdev_avg_don <- sqrt(variance_avg_don) # squre root of variance
 stdev_avg_don
 ```
 

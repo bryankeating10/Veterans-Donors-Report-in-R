@@ -21,3 +21,9 @@
 - Donor home settlement and response to mailing combination (Urbanicity bookmark)
 
 - (Time Since First and Last Donation bookmark)
+
+## Statistics
+
+- Population variance and standard deviation (Measures of Variability bookmark)
+
+- Range and interquartile range (Measures of Variability bookmark)
